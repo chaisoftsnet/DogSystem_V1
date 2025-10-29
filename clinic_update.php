@@ -46,7 +46,8 @@ body {
 .toggle-dark { cursor: pointer; color: #198754; float: right; }
 </style>
 </head>
-
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
 <body>
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
