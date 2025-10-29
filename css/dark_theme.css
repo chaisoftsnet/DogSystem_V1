@@ -1,0 +1,26 @@
+.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+/* ส่วนประกอบหลัก */
+.dark-mode .card,
+.dark-mode .modal-content {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #333;
+}
+
+/* ปุ่ม */
+.dark-mode .btn {
+  color: #fff;
+}
+
+/* ตาราง */
+.dark-mode table {
+  color: #f1f1f1;
+}
+.dark-mode .table thead {
+  background-color: #222;
+  color: #00e676;
+}
