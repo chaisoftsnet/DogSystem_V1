@@ -7,7 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<?session_start();?>
+
 <style>
 /* 🌌 พื้นหลัง */
 body {
@@ -143,22 +143,16 @@ body {
 
   <div class="login-box">
     <h4><i class="bi bi-hospital"></i> ระบบบริหารคลินิกรักษาสัตว์ V.1</h4>
-    <form action="login_process.php" method="post">
-      <select name="username" required>
-        <option value="">-- เลือกชื่อผู้ใช้ --</option>
-        <option value="admin">admin</option>
-        <option value="manager_brand_2">manager_brand_2</option>
-        <option value="user_brand_2_1">user_brand_2_1</option>
-      </select>
-
-      <input type="password" name="password" placeholder="🔑 รหัสผ่าน" value="1111" required>
+    <form action="login_process.php" method="post">      
+      <input type="text" name="username" placeholder="username" value="" required>
+      <input type="password" name="password" placeholder="🔑 รหัสผ่าน" value="p2276633" required>
       <button type="submit">เข้าสู่ระบบ</button>
 
       <div class="register-link">
         ยังไม่มีบัญชี? <a href="register.php">สมัครสมาชิกที่นี่</a>
       </div>
 
-      <a href="http://chaisofts.thddns.net:81/App_ppc/index.php" class="btn-home">
+      <a href="http://183.88.236.186:2454/MainDashboard.php" class="btn-home">
         <i class="bi bi-arrow-left"></i> กลับหน้าหลัก
       </a>
     </form>

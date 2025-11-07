@@ -166,7 +166,7 @@ h5 { color: var(--text-sub); margin-bottom: 30px; }
   <i class="fa fa-moon"></i> </button>
 
 <div class="container">
-  <h2>🏥 ระบบบริหารจัดการคลินิกรักษาสัตว์</h2>
+  <h2>🏥 ระบบบริหารจัดการคลินิกรักษาสัตว์ Version 1.0/2568</h2>
   <h5>คลินิก: <?=ret_clinic($_SESSION['clinic_id'],$objCon);?><br>
   <small>สิทธิ์ผู้ใช้: <?=$aRole[$_SESSION['role']]?></small></h5>
 
@@ -246,7 +246,7 @@ h5 { color: var(--text-sub); margin-bottom: 30px; }
       <i class="fa-solid fa-chart-column text-success"></i>
       <h5>รายงาน</h5>
       <p>รายงานข้อมูลการรักษาและการทำงานคลินิก</p>
-      <a href="reportAll.php?report_type=dogs&Mode=<?=$Mode?>" target="_blank">ดูรายงาน</a>
+      <a href="clinic_summary.php" target="_blank">ดูรายงาน</a>
     </div>
     <?php endif; ?>
 
@@ -272,6 +272,12 @@ h5 { color: var(--text-sub); margin-bottom: 30px; }
       <a href="invoice_dashboard.php" class="btn btn-outline-secondary">  จัดการใบเสร็จ</a>
     </div>
 
+    <div class="card-glass">
+      <i class="fa-solid fa-user-gear text-danger"></i>    
+      <h5 class="card-title">💰 ระบบรายการยาที่ขายโดย supplier contect</h5>
+      <p>บันทึกข้อมูลยาที่นำมาจำหน่าย</p>
+      <a href="purchase_dashboard.php" class="btn btn-outline-secondary">  ระบบใบสั่งซื้อยา</a>
+    </div>
     <?php endif; ?>
   </div>
   

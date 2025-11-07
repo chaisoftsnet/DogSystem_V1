@@ -54,7 +54,7 @@ h4 { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
       โทร: <?=$inv['clinic_phone']?> | อีเมล: <?=$inv['clinic_email']?></small>
     </div>
     <div>
-      <img src="images/clinic_logo.png" class="header-logo" alt="Clinic Logo">
+      <img src="images/clinic_logoPP.png" class="header-logo" alt="Clinic Logo">
     </div>
   </div>
 

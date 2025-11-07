@@ -71,7 +71,7 @@ body {
     <div>
       <button class="btn btn-success btn-sm" id="addNewBtn"><i class="fa fa-plus-circle"></i> เพิ่มสินค้าใหม่</button>
       <a href="stock_ledger.php" class="btn btn-info btn-sm"><i class="fa fa-print"></i> พิมพ์รายงานรวมคลัง</a>
-      <a href="invoice_dashboard.php" class="btn btn-secondary btn-sm"><i class="fa fa-home"></i> กลับหน้าหลัก</a>
+      <a href="purchase_dashboard.php" class="btn btn-secondary btn-sm"><i class="fa fa-home"></i> กลับหน้าหลัก</a>
     </div>
   </div>
 
