@@ -250,7 +250,7 @@ h5 { color: var(--text-sub); margin-bottom: 30px; }
     </div>
     <?php endif; ?>
 
-    <?php if($_SESSION['role']==3): ?>
+    <?php if($_SESSION['role']==4): ?>
     <div class="card-glass">
       <i class="fa-solid fa-hospital text-info"></i>
       <h5>ข้อมูลคลินิก</h5>
@@ -281,9 +281,12 @@ h5 { color: var(--text-sub); margin-bottom: 30px; }
     <?php endif; ?>
   </div>
   
-</div>
 
+  
+  <a href="document/document_user.pdf" class="logout-btn" traget="_blank">💰 คู่มือการใช้งาน_user</a>
+  <a href="document/document_admin.pdf" class="logout-btn" traget="_blank">💰 คู่มือการใช้งาน_admin</a>
   <a href="logout.php" class="logout-btn"><i class="bi bi-box-arrow-right"></i> ออกจากระบบ</a>
+    
 </div>
 
 <script>

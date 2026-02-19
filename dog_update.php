@@ -42,7 +42,7 @@ img.xray-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover;
   border: none;
 }
 .btn-add:hover { opacity: 0.9; }
-.toggle-dark { cursor: pointer; color: #198754; float: right; font-size: 20px; }
+.toggle-dark { cursor: pointer; color: #198754; float: left; font-size: 20px; }
 </style>
 </head>
 <link rel="stylesheet" href="css/theme.css">
@@ -181,10 +181,13 @@ img.xray-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover;
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-
 <script>
 $(function(){
-  $('#dogTable').DataTable({
+
+  /* ===============================
+     DATATABLE
+  ================================ */
+  var table = $('#dogTable').DataTable({
     language: {
       lengthMenu: "แสดง _MENU_ รายการต่อหน้า",
       zeroRecords: "ไม่พบข้อมูล",
@@ -194,53 +197,81 @@ $(function(){
     }
   });
 
-  // เพิ่มข้อมูล
-  $('#addForm').submit(function(e){
+  /* ===============================
+     ADD DOG
+  ================================ */
+  $('#addForm').on('submit', function(e){
     e.preventDefault();
     let formData = new FormData(this);
     $.ajax({
       url: 'dog_action.php?action=add',
       type: 'POST',
       data: formData,
-      contentType: false, processData: false,
-      success: function(res){ alert(res); location.reload(); }
+      contentType: false,
+      processData: false,
+      success: function(res){
+        alert(res);
+        location.reload();
+      }
     });
   });
 
-  // ลบข้อมูล
-  $('.delBtn').click(function(){
+  /* ===============================
+     ✅ DELETE (delegation)
+  ================================ */
+  $(document).on('click', '.delBtn', function(){
+    let id = $(this).data('id');
     if(confirm('แน่ใจว่าต้องการลบข้อมูลนี้?')){
-      $.post('dog_action.php?action=delete',{id:$(this).data('id')},function(res){
-        alert(res); location.reload();
-      });
+      $.post(
+        'dog_action.php?action=delete',
+        {id:id},
+        function(res){
+          alert(res);
+          location.reload();
+        }
+      );
     }
   });
 
-  // แก้ไขข้อมูล
-  $('.editBtn').click(function(){
+  /* ===============================
+     ✅ EDIT (delegation)
+  ================================ */
+  $(document).on('click', '.editBtn', function(){
     let id = $(this).data('id');
-    $('#editBody').load('dog_action.php?action=editform&id='+id);
+    $('#editBody').html('<div class="text-center p-3">กำลังโหลด...</div>');
+    $('#editBody').load('dog_action.php?action=editform&id=' + id);
     $('#editModal').modal('show');
   });
 
-  // อัปเดตข้อมูล
-  $('#editForm').submit(function(e){
+  /* ===============================
+     UPDATE DOG
+  ================================ */
+  $('#editForm').on('submit', function(e){
     e.preventDefault();
     let formData = new FormData(this);
     $.ajax({
       url: 'dog_action.php?action=update',
       type: 'POST',
       data: formData,
-      contentType: false, processData: false,
-      success: function(res){ alert(res); location.reload(); }
+      contentType: false,
+      processData: false,
+      success: function(res){
+        alert(res);
+        location.reload();
+      }
     });
   });
+
 });
 
+/* ===============================
+   DARK MODE
+================================ */
 function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
 }
 </script>
+
 
 </body>
 </html>

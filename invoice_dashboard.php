@@ -137,6 +137,11 @@ h4 {
   </div>
 
   <div class="row justify-content-center g-3">
+<div class="col-md-3">
+      <a href="invoice_add.php" class="btn btn-main w-100 py-3">
+        <i class="fa fa-plus-circle"></i> ออกใบแจ้งหนี้ใหม่
+      </a>
+    </div>    
     <div class="col-md-3">
       <a href="invoice_manage.php" class="btn btn-main w-100 py-3">
         <i class="fa fa-file-invoice"></i> จัดการใบแจ้งหนี้
@@ -148,15 +153,17 @@ h4 {
       </a>
     </div>
     <div class="col-md-3">
-      <a href="invoice_add.php" class="btn btn-main w-100 py-3">
-        <i class="fa fa-plus-circle"></i> ออกใบแจ้งหนี้ใหม่
+      <a href="document/document_pos.pdf" class="btn btn-secondary w-100 py-3">
+        <i class="fa fa-file"></i> คู่มือ
       </a>
     </div>
+
     <div class="col-md-3">
       <a href="dashboard.php" class="btn btn-secondary w-100 py-3">
         <i class="fa fa-home"></i> กลับหน้าหลัก
       </a>
     </div>
+
   </div>
 </div>
 

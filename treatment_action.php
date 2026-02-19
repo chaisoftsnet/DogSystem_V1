@@ -37,8 +37,8 @@ switch ($action) {
       $file_type = $_POST['file_type'] ?? 'อื่นๆ';
       $note = "ไฟล์แนบจากการรักษา ID: $treatment_id";
 
-      $fsql = "INSERT INTO attachments (dog_id, clinic_id, file_type, file_path, note, uploaded_at)
-               VALUES ('$dog_id','$clinic_id','$file_type','$target_file','$note',NOW())";
+      $fsql = "INSERT INTO attachments (dog_id, clinic_id, file_type, file_path, note)
+               VALUES ('$dog_id','$clinic_id','$file_type','$target_file','$note')";
       mysqli_query($objCon, $fsql);
     }
 

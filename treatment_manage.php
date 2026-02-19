@@ -15,7 +15,7 @@ $clinic_id = $_SESSION['clinic_id'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>💉 จัดการข้อมูลการรักษาพยาบาลสัตว์</title>
+<title>💉 การจัดการข้อมูลการรักษาพยาบาลสัตว์</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -35,16 +35,17 @@ img.file-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cove
   color: white; border: none;
 }
 .btn-add:hover { opacity: 0.9; }
-.toggle-dark { cursor: pointer; color: #198754; float: right; font-size: 20px; }
+.toggle-dark { cursor: pointer; color: #198754; font-size: 20px; }
 </style>
 </head>
 <link rel="stylesheet" href="css/theme.css">
 <script src="js/theme.js"></script>
 <body>
+  
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3>📅 จัดการการนัดหมาย</h3>
-    <div>          
+    <h3>💉 การจัดการข้อมูลการรักษาพยาบาลสัตว์</h3>
+        <div>          
       <span class="toggle-dark" onclick="toggleDarkMode()"> <i class="bi bi-moon-stars"></i> / <i class="bi bi-brightness-high"></i></span>
       <a href="dashboard.php" class="btn btn-secondary btn-sm ms-2"><i class="fa fa-home"></i> กลับหน้าหลัก</a>
     </div>
@@ -96,7 +97,7 @@ img.file-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cove
           $filePath = (mysqli_num_rows($fres)>0) ? mysqli_fetch_assoc($fres)['file_path'] : "images/no-file.png";
           echo "
           <tr>
-            <td>{$i}</td>
+            <td>{$i}.<sup>{$r['treatment_id']}</sup></td>
             <td>{$r['treatment_date']}</td>
             <td>{$r['dog_name']}</td>
             <td>{$r['symptoms']}</td>
@@ -146,7 +147,7 @@ img.file-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cove
         <div class="col-12"><label>ยา/เวชภัณฑ์</label><textarea name="medication" class="form-control"></textarea></div>
         <div class="col-md-6"><label>วันนัดถัดไป</label><input type="date" name="next_appointment" class="form-control"></div>
         <div class="col-md-6">
-          <label>ไฟล์แนบ</label>
+          <label>ไฟล์แนบ-image</label>
           <input type="file" name="attachment" class="form-control" accept="image/*,application/pdf">
           <select name="file_type" class="form-select mt-2">
             <option value="ใบเสร็จ">ใบเสร็จ</option>

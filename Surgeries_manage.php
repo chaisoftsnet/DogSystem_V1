@@ -28,7 +28,7 @@ body { background-color: #f8f9fa; transition: background 0.3s, color 0.3s; }
 img.surgery-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 1px solid #ccc; }
 .btn-add { background: linear-gradient(45deg, #28a745, #00c853); color: white; border: none; }
 .btn-add:hover { opacity: 0.9; }
-.toggle-dark { cursor: pointer; color: #198754; float: right; font-size: 20px; }
+.toggle-dark { cursor: pointer; color: #198754; float: left; font-size: 20px; }
 </style>
 </head>
 <link rel="stylesheet" href="css/theme.css">

@@ -1,0 +1,262 @@
+/* ===============================
+   BASE THEME VARIABLES
+================================ */
+
+/* ===== DARK MODE (DEFAULT) ===== */
+:root {
+  --bg-main:#020617;
+  --card:#020617;
+  --text-main:#f9fafb;
+  --text-muted:#9ca3af;
+  --border:#334155;
+
+  /* Buttons */
+  --btn-green:#22c55e;
+  --btn-blue:#2563eb;
+  --btn-yellow:#f59e0b;
+
+  /* Inputs */
+  --input-bg:#020617;
+  --input-text:#f9fafb;
+
+  /* Popup */
+  --popup-bg:#1f2937;
+  --popup-border:#334155;
+  --popup-text:#f9fafb;
+}
+
+/* ===== LIGHT MODE ===== */
+body.light {
+  --bg-main:#f8fafc;
+  --card:#ffffff;
+  --text-main:#111827;
+  --text-muted:#6b7280;
+  --border:#e5e7eb;
+
+  --input-bg:#ffffff;
+  --input-text:#111827;
+
+  --popup-bg:#f1f5f9;
+  --popup-border:#cbd5e1;
+  --popup-text:#111827;
+}
+
+/* ===============================
+   GLOBAL
+================================ */
+body{
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-family:'Prompt',sans-serif;
+  margin:0;
+}
+
+h1,h2,h3,h4,h5,label{
+  color:var(--text-main);
+}
+
+.text-muted{
+  color:var(--text-muted);
+}
+
+/* ===============================
+   TOP BAR
+================================ */
+.topbar{
+  background:#020617;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+body.light .topbar{
+  background:#1e293b;
+}
+
+.topbar-text{
+  color:#ffffff;
+  font-weight:500;
+}
+
+.theme-btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.3);
+  color:#ffffff;
+  padding:6px 12px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn-new{background:var(--btn-green);color:#fff;}
+.btn-old{background:var(--btn-blue);color:#fff;}
+.btn-app{background:var(--btn-yellow);color:#000;}
+
+button{
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  cursor:pointer;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.queue-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+.queue-table th{
+  background:#020617;
+  color:#9ca3af;
+  padding:12px;
+}
+
+.queue-table td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+}
+
+body.light .queue-table th{
+  background:#f1f5f9;
+  color:#334155;
+}
+
+/* ===============================
+   STATUS BADGE
+================================ */
+.status{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:500;
+  border:1px solid transparent;
+  white-space:nowrap;
+}
+
+/* รอตรวจ */
+.status.รอตรวจ{
+  color:#92400e;
+  background:#fef3c7;
+  border-color:#fde68a;
+}
+
+/* กำลังรักษา */
+.status.กำลังรักษา{
+  color:#1e40af;
+  background:#dbeafe;
+  border-color:#93c5fd;
+}
+
+/* รอชำระเงิน */
+.status.รอชำระเงิน{
+  color:#92400e;
+  background:#fef3c7;
+  border-color:#fcd34d;
+}
+
+/* เสร็จสิ้น */
+.status.เสร็จสิ้น{
+  color:#065f46;
+  background:#d1fae5;
+  border-color:#6ee7b7;
+}
+
+/* ===== DARK MODE STATUS ===== */
+body:not(.light) .status.รอตรวจ{
+  color:#fcd34d;
+  background:rgba(251,191,36,0.15);
+  border-color:#fcd34d;
+}
+
+body:not(.light) .status.กำลังรักษา{
+  color:#93c5fd;
+  background:rgba(59,130,246,0.18);
+  border-color:#60a5fa;
+}
+
+body:not(.light) .status.รอชำระเงิน{
+  color:#fde68a;
+  background:rgba(245,158,11,0.18);
+  border-color:#facc15;
+}
+
+body:not(.light) .status.เสร็จสิ้น{
+  color:#6ee7b7;
+  background:rgba(16,185,129,0.18);
+  border-color:#34d399;
+}
+
+/* ===============================
+   POPUP
+================================ */
+.popup-card{
+  background:var(--popup-bg);
+  color:var(--popup-text);
+  border:1px solid var(--popup-border);
+  border-radius:16px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.7);
+}
+
+/* ===============================
+   FORM
+================================ */
+input,textarea,select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--input-bg);
+  color:var(--input-text);
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:var(--text-muted);
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer-note{
+  margin-top:20px;
+  color:var(--text-muted);
+  font-size:13px;
+}
+/* ===============================
+   LINK COLOR (DARK MODE FRIENDLY)
+================================ */
+
+/* ลิงก์ปกติ */
+a{
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+/* hover */
+a:hover{
+  color: #e5e7eb;   /* เทาขาว นุ่มตา */
+  text-decoration: underline;
+}
+
+/* ลิงก์ในตารางคิว */
+.queue-table a{
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* Light mode */
+body.light a{
+  color: #1f2937;   /* เทาเข้ม */
+}
+body.light a:hover{
+  color: #111827;
+}

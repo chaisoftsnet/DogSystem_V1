@@ -8,7 +8,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] < 2) {
   exit();
 }
 
-$aRole = ['คนทั่วไป','ลูกค้า','เจ้าหน้าที่คลินิก','ผู้ดูแลระบบ'];
+$aRole = ['คนทั่วไป','ลูกค้า','เจ้าหน้าที่คลินิก','หมอ','ผู้ดูแลระบบ'];
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -46,7 +46,7 @@ body {
 .btn-add:hover { opacity: 0.9; }
 .toggle-dark {
   cursor: pointer;
-  float: right;
+  float: left;
   color: #007bff;
   font-size: 1.2rem;
 }
@@ -135,7 +135,8 @@ body {
             <option value="">-- เลือกสิทธิ์ --</option>
             <option value="1">ลูกค้า</option>
             <option value="2">เจ้าหน้าที่คลินิก</option>
-            <option value="3">ผู้ดูแลระบบ</option>
+            <option value="3">หมอ</option>
+            <option value="4">ผู้ดูแลระบบ</option>            
           </select>
         </div>
         <div class="col-md-6">
@@ -182,8 +183,12 @@ body {
 
 <script>
 $(function(){
-  $('#userTable').DataTable({
-    pageLength: 10,
+
+  // ===============================
+  // DATATABLE
+  // ===============================
+  var table = $('#userTable').DataTable({
+    pageLength: 50,
     language: {
       lengthMenu: "แสดง _MENU_ รายการต่อหน้า",
       zeroRecords: "ไม่พบข้อมูล",
@@ -193,6 +198,9 @@ $(function(){
     }
   });
 
+  // ===============================
+  // ADD USER
+  // ===============================
   $('#addForm').on('submit', function(e){
     e.preventDefault();
     $.post('user_action.php?action=add', $(this).serialize(), function(res){
@@ -201,13 +209,20 @@ $(function(){
     });
   });
 
-  $('.editBtn').click(function(){
+  // ===============================
+  // ✅ EDIT (ใช้ event delegation)
+  // ===============================
+  $(document).on('click', '.editBtn', function(){
     let id = $(this).data('id');
-    $('#editBody').load('user_action.php?action=editform&id='+id);
+    $('#editBody').html('<div class="text-center p-3">กำลังโหลด...</div>');
+    $('#editBody').load('user_action.php?action=editform&id=' + id);
     $('#editModal').modal('show');
   });
 
-  $('#editForm').submit(function(e){
+  // ===============================
+  // UPDATE USER
+  // ===============================
+  $('#editForm').on('submit', function(e){
     e.preventDefault();
     $.post('user_action.php?action=update', $(this).serialize(), function(res){
       alert(res);
@@ -215,19 +230,28 @@ $(function(){
     });
   });
 
-  $('.delBtn').click(function(){
+  // ===============================
+  // ✅ DELETE (ต้อง delegation เช่นกัน)
+  // ===============================
+  $(document).on('click', '.delBtn', function(){
+    let id = $(this).data('id');
     if(confirm('แน่ใจว่าต้องการลบผู้ใช้นี้?')){
-      $.post('user_action.php?action=delete',{id:$(this).data('id')},function(res){
+      $.post('user_action.php?action=delete',{id:id},function(res){
         alert(res);
         location.reload();
       });
     }
   });
+
 });
 
+// ===============================
+// DARK MODE
+// ===============================
 function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
 }
 </script>
+
 </body>
 </html>

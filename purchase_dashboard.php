@@ -173,6 +173,7 @@ h2 { color: var(--accent); text-shadow: 0 0 10px rgba(0,230,118,0.4); }
 
   <div class="text-center mt-5">
     <a href="dashboard.php" class="btn btn-outline-light"><i class="fa fa-arrow-left"></i> กลับหน้าหลักคลินิก</a>
+    <a href="document/document_po.pdf" class="btn btn-outline-light"><i class="fa fa-file"></i> คู่มือระบบจัดซื้อยาและคลังวัคซีน</a>    
   </div>
 </div>
 

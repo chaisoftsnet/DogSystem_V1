@@ -43,7 +43,7 @@ body {
 }
 .btn-add:hover { opacity: 0.9; }
 .table td, .table th { vertical-align: middle; }
-.toggle-dark { cursor: pointer; color: #198754; float: right; }
+.toggle-dark { cursor: pointer; color: #198754; float: left; }
 </style>
 </head>
 <link rel="stylesheet" href="css/theme.css">
@@ -69,7 +69,7 @@ body {
     <table id="clinicTable" class="table table-striped table-bordered text-center align-middle">
       <thead class="table-dark">
         <tr>
-          <th>#</th>
+          <th>clinic_id</th>
           <th>ชื่อคลินิก</th>
           <th>ที่อยู่</th>
           <th>โทรศัพท์</th>
@@ -86,7 +86,7 @@ body {
         $i = 1;
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>
-                  <td>{$i}</td>
+                  <td>{$row['clinic_id']}</td>
                   <td>{$row['clinic_name']}</td>
                   <td>{$row['address']}</td>
                   <td>{$row['phone']}</td>

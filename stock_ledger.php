@@ -164,6 +164,91 @@ body.light-mode .filter-box {
   .product-group { color: #000; background: #e0f2f1; }
   .summary-row, .total-summary { color: #000; background: #f1f8e9; }
 }
+/* 🖤 บังคับให้ Dark Mode ตัวหนังสือเป็นสีขาวทั้งหมด */
+body:not(.light-mode) .table td,
+body:not(.light-mode) .table th,
+body:not(.light-mode) .table tbody tr td,
+body:not(.light-mode) .table thead tr th {
+  color: #fff !important;
+}
+
+/* 🖤 หัวตารางใน Dark Mode */
+body:not(.light-mode) .table thead {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+/* 🖤 สีกลุ่มสินค้า */
+body:not(.light-mode) .product-group {
+  background: rgba(255,255,255,0.1) !important;
+  color: #00e676 !important;
+}
+
+/* 🖤 สรุปของแต่ละสินค้า */
+body:not(.light-mode) .summary-row {
+  background: rgba(255,255,255,0.10) !important;
+  color: #ffe082 !important;
+}
+
+/* 🖤 สรุปรวมทั้งหมด */
+body:not(.light-mode) .total-summary {
+  background: rgba(255,255,255,0.15) !important;
+  color: #00e676 !important;
+}
+
+/* 🖤 เส้นขอบใน Dark Mode */
+body:not(.light-mode) .table-bordered {
+  border-color: rgba(255,255,255,0.2) !important;
+}
+/* ----------------------------------------------------
+   🖤 DARK MODE — ปรับตารางทั้งหมดให้เข้มสนิท
+-----------------------------------------------------*/
+body:not(.light-mode) table {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+body:not(.light-mode) .table th,
+body:not(.light-mode) .table td {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+/* หัวตาราง */
+body:not(.light-mode) .table thead th {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
+}
+
+/* แถวสินค้า (product group) */
+body:not(.light-mode) .product-group {
+  background-color: #000 !important;
+  color: #00e676 !important;
+  font-weight: bold;
+}
+
+/* แถวสรุปสินค้า */
+body:not(.light-mode) .summary-row {
+  background-color: #2a2a2a !important;
+  color: #ffe082 !important;
+}
+
+/* แถวสรุปรวมทั้งหมด */
+body:not(.light-mode) .total-summary {
+  background-color: #003300 !important;
+  color: #00e676 !important;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* สีของ +IN / -OUT ให้เด่นขึ้น */
+body:not(.light-mode) .trans-in { color: #00ff99 !important; }
+body:not(.light-mode) .trans-out { color: #ff6666 !important; }
+
+/* เส้นขอบตาราง */
+body:not(.light-mode) .table-bordered {
+  border-color: rgba(255,255,255,0.2) !important;
+}
 
 </style>
 </head>
@@ -174,8 +259,9 @@ body.light-mode .filter-box {
 <div class="container container-box">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3><i class="fa-solid fa-book"></i> สมุดรายวันคลังยาและวัคซีน</h3>
-    <div class="print-hide">
+    <div class="print-hide">      
       <button onclick="window.print()" class="btn btn-main btn-sm"><i class="fa fa-print"></i> พิมพ์รายงาน</button>
+      <a href="invoice_manage.php" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> กลับไปที่ใบแจ้งหนี้</a>
       <a href="stock_manage.php" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> กลับคลัง</a>
     </div>
   </div>

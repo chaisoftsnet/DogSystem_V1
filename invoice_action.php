@@ -59,8 +59,8 @@ if($action==='add_item'){
   $qty        = (float)($_POST['quantity'] ?? 1);
   $price      = (float)($_POST['unit_price'] ?? 0);
 
-  $sql = "INSERT INTO invoice_items(invoice_id, description, quantity, unit_price) 
-          VALUES($invoice_id,'$desc',$qty,$price)";
+  $sql = "INSERT INTO invoice_items(product_id,invoice_id, description, quantity, unit_price) 
+          VALUES($product_id,$invoice_id,'$desc',$qty,$price)";
   if(!mysqli_query($objCon,$sql)) j("เพิ่มรายการไม่สำเร็จ: ".mysqli_error($objCon));
 
   // อัพเดทยอดรวม

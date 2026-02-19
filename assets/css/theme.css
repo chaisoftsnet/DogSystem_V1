@@ -1,0 +1,123 @@
+/* ----------------------------------------------------
+   🌙 DARK MODE (ค่าเริ่มต้น) + 🌞 LIGHT MODE
+   ใช้ได้ทุกหน้าในระบบ
+----------------------------------------------------- */
+
+/* Default: Dark Mode */
+:root {
+  --bg-main: #121212;
+  --bg-panel: #1e1e1e;
+  --bg-panel-dark: #2a2a2a;
+  --text-main: #ffffff;
+  --text-sub: #cccccc;
+  --border-light: rgba(255,255,255,0.12);
+  --accent: #00e676;
+}
+
+/* 🟡 Light Mode */
+body.light-mode {
+  --bg-main: #f5f5f5;
+  --bg-panel: white;
+  --bg-panel-dark: #e0e0e0;
+  --text-main: #111;
+  --text-sub: #444;
+  --border-light: #ccc;
+  --accent: #00bfa5;
+}
+
+/* Body */
+body {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  transition: 0.35s ease-in-out;
+}
+
+/* Card / Panel */
+.container-box {
+  background: var(--bg-panel) !important;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+
+/* Table */
+table {
+  background: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+table thead th {
+  background: var(--bg-panel-dark) !important;
+  color: var(--text-main) !important;
+}
+table td {
+  border-color: var(--border-light) !important;
+}
+.table-hover tbody tr:hover {
+  background: var(--bg-panel-dark) !important;
+}
+
+/* Inputs */
+.form-control,
+.form-select {
+  background: var(--bg-panel-dark) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-light) !important;
+}
+.form-control:focus,
+.form-select:focus {
+  background: #333 !important;
+  border-color: var(--accent) !important;
+}
+
+/* Modal */
+.modal-content {
+  background: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-light) !important;
+}
+
+/* Pagination */
+.page-link {
+  background: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-light) !important;
+}
+.page-item.active .page-link {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+/* ----------------------------------------------------
+   🌗 ปุ่มสลับโหมด — Floating Toggle Button
+----------------------------------------------------- */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: var(--bg-panel-dark);
+  color: var(--text-main);
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+  z-index: 9999;
+}
+body.light-mode .theme-toggle {
+  background: var(--bg-panel);
+  color: #000;
+}

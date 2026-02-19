@@ -38,7 +38,7 @@ body {
   border: none;
 }
 .btn-add:hover { opacity: 0.9; }
-.toggle-dark { cursor: pointer; color: #198754; float: right; font-size: 20px; }
+.toggle-dark { cursor: pointer; color: #198754; float: left; font-size: 20px; }
 </style>
 </head>
 <link rel="stylesheet" href="css/theme.css">

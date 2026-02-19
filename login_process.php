@@ -35,8 +35,13 @@ if ($objQuery && mysqli_num_rows($objQuery) > 0) {
             case 1: // ลูกค้า
                 header("Location: dog_dashboard.php");
                 break;
-            case 2: // เจ้าหน้าที่คลินิก
-            case 3: // ผู้ดูแลระบบ
+            case 2: // เจ้าหน้าที่คลินิก หน้าร้าน
+                header("Location: dashboard_FrontDesk.php");
+                break;
+            case 3: // หมอ
+                header("Location: dashboard_Doctor.php");
+                break;                
+            case 4: // ผู้ดูแลระบบ
                 header("Location: dashboard.php");
                 break;
             default:

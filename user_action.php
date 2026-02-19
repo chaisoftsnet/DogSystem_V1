@@ -57,7 +57,8 @@ switch($action) {
         <select name="role" class="form-select">
           <option value="1" <?=($r['role']==1)?'selected':''?>>ลูกค้า</option>
           <option value="2" <?=($r['role']==2)?'selected':''?>>เจ้าหน้าที่คลินิก</option>
-          <option value="3" <?=($r['role']==3)?'selected':''?>>ผู้ดูแลระบบ</option>
+          <option value="3" <?=($r['role']==3)?'selected':''?>>หมอ</option>
+          <option value="4" <?=($r['role']==4)?'selected':''?>>ผู้ดูแลระบบ</option>
         </select>
       </div>
       <div class="col-md-6">

@@ -7,7 +7,6 @@ $dog = null;
 
 if ($dog_id > 0) {
     $dog = mysqli_fetch_assoc(mysqli_query($objCon,"SELECT * FROM dogs WHERE dog_id=$dog_id"));
-
     $treatments    = mysqli_query($objCon,"SELECT * FROM treatments WHERE dog_id=$dog_id ORDER BY treatment_date DESC");
     $appointments  = mysqli_query($objCon,"SELECT * FROM appointments WHERE dog_id=$dog_id ORDER BY appointment_date DESC");
     $vaccinations  = mysqli_query($objCon,"SELECT * FROM vaccinations WHERE dog_id=$dog_id ORDER BY vaccine_date DESC");
@@ -27,13 +26,14 @@ function showTable($title,$result,$headers,$fields,$module,$idField){
     echo '<div class="card-header bg-secondary text-white d-flex justify-content-between">';
     echo '<span>'.$title.'</span>';
     echo '<button class="btn btn-sm btn-light"
-            onclick="openForm(\''.$module.'_form.php?action=add&dog_id='.$dog_id.'\')">
-            + เพิ่ม
-          </button>';
+        onclick="openForm(
+            \'form.php?module='.$module.'&action=add&dog_id='.$dog_id.'\'
+        )">+ เพิ่ม</button>';
     echo '</div>';
 
     echo '<div class="card-body table-responsive">';
     if(mysqli_num_rows($result)>0){
+
         echo '<table class="table table-bordered table-sm align-middle">';
         echo '<thead class="table-light"><tr>';
         foreach($headers as $h) echo "<th>$h</th>";
@@ -49,21 +49,24 @@ function showTable($title,$result,$headers,$fields,$module,$idField){
                     echo '<td>'.htmlspecialchars($row[$f]??'').'</td>';
                 }
             }
-            echo '<td>
+
+            echo '<td align="center">
                 <button class="btn btn-warning btn-sm"
-                    onclick="openForm(\''.$module.'_form.php?action=edit&id='.$row[$idField].'&dog_id='.$dog_id.'\')">
-                    แก้ไข
-                </button>
+                    onclick="openForm(
+                        \'form.php?module='.$module.'&action=edit&id='.$row[$idField].'&dog_id='.$dog_id.'\'
+                    )">แก้ไข</button>
+
                 <button class="btn btn-danger btn-sm"
                     onclick="confirmDelete(
                         \''.$module.'\',
-                        \''.$module.'_update.php?action=delete&id='.$row[$idField].'&dog_id='.$dog_id.'\'
-                    )">
-                    ลบ
-                </button>
+                        '.$row[$idField].',
+                        '.$dog_id.'
+                    )">ลบ</button>
             </td>';
+
             echo '</tr>';
         }
+
         echo '</tbody></table>';
     }else{
         echo '<p class="text-muted mb-0">ไม่มีข้อมูล</p>';
@@ -72,6 +75,7 @@ function showTable($title,$result,$headers,$fields,$module,$idField){
 }
 
 /* ===================== AJAX SECTION ===================== */
+//$title,$result,$headers,$fields,$module,$idField
 if(isset($_GET['ajax'])){
     switch($_GET['ajax']){
         case 'treatment':
@@ -90,7 +94,7 @@ if(isset($_GET['ajax'])){
             showTable("วัคซีน",$vaccinations,
                 ["ชื่อวัคซีน","ประเภท","วันที่ฉีด","วันนัดถัดไป","สัตวแพทย์","หมายเหตุ"],
                 ["vaccine_name","vaccine_type","vaccine_date","next_due_date","doctor_name","note"],
-                "vaccination","vaccination_id"); break;
+                "vaccination","vaccine_id"); break;
 
         case 'lab':
             showTable("ผลแล็บ",$lab_results,
@@ -185,7 +189,7 @@ if(isset($_GET['ajax'])){
 <div id="section-vaccination"><?php showTable("วัคซีน",$vaccinations,
 ["ชื่อวัคซีน","ประเภท","วันที่ฉีด","วันนัดถัดไป","สัตวแพทย์","หมายเหตุ"],
 ["vaccine_name","vaccine_type","vaccine_date","next_due_date","doctor_name","note"],
-"vaccination","vaccination_id"); ?></div>
+"vaccination","vaccine_id"); ?></div>
 
 <div id="section-lab"><?php showTable("ผลแล็บ",$lab_results,
 ["วันที่ตรวจ","ผลเลือด","ผลปัสสาวะ","ไฟล์","หมายเหตุ"],
@@ -219,42 +223,78 @@ if(isset($_GET['ajax'])){
 
 <?php endif; ?>
 </div>
+<script>
+const MODULE_LABELS = {
+    treatment   : 'ประวัติการรักษา',
+    appointment : 'การนัดหมาย',
+    vaccination : 'วัคซีน',
+    deworming   : 'ถ่ายพยาธิ',
+    lab         : 'ผลตรวจแล็บ',
+    surgery     : 'ผ่าตัด / หัตถการ',
+    nutrition   : 'โภชนาการ',
+    boarding    : 'ฝากเลี้ยง',
+    attachment  : 'ไฟล์แนบ'
+};
+</script>
 
 <!-- MODAL -->
 <div class="modal fade" id="crudModal" tabindex="-1">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title">จัดการข้อมูล</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="crudModalTitle">จัดการข้อมูล</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="modalContent"></div>
+
+    </div>
+  </div>
 </div>
-<div class="modal-body" id="modalContent"></div>
-</div>
-</div>
-</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 function openForm(url){
+     // ดึงค่า module / action จาก URL
+    const params = new URLSearchParams(url.split('?')[1] || '');
+    const module = params.get('module');
+    const action = params.get('action');
+
+    // สร้าง title
+    let title = 'จัดการข้อมูล';
+    if(module && MODULE_LABELS[module]){
+        title = (action === 'edit' ? 'แก้ไข' : 'เพิ่ม') + ' : ' + MODULE_LABELS[module];
+    }
+
+    // ตั้ง title ให้ modal
+    document.getElementById('crudModalTitle').innerText = title;
+
+    // โหลดฟอร์ม
     const modal = new bootstrap.Modal(document.getElementById('crudModal'));
-    document.getElementById('modalContent').innerHTML='กำลังโหลด...';
-    fetch(url).then(r=>r.text()).then(html=>{
-        document.getElementById('modalContent').innerHTML=html;
-    });
+    document.getElementById('modalContent').innerHTML = 'กำลังโหลด...';
+
+    fetch(url)
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById('modalContent').innerHTML = html;
+        });
+
     modal.show();
 }
 
 function reloadSection(module){
-    fetch('dog_profile.php?dog_id=<?=$dog_id?>&ajax='+module)
+    fetch('dog_profile_new.php?dog_id=<?=$dog_id?>&ajax='+module)
         .then(r=>r.text())
         .then(html=>{
             document.getElementById('section-'+module).innerHTML=html;
         });
 }
 
-function confirmDelete(module,url){
+function confirmDelete(module, id, dog_id){
     Swal.fire({
         title:'ยืนยันการลบ',
         icon:'warning',
@@ -262,16 +302,37 @@ function confirmDelete(module,url){
         confirmButtonText:'ลบ'
     }).then(r=>{
         if(r.isConfirmed){
-            fetch(url).then(r=>r.json()).then(d=>{
+
+            const fd = new FormData();
+            fd.append('module', module);
+            fd.append('action', 'delete');
+            fd.append('id', id);
+            fd.append('dog_id', dog_id);
+
+            fetch('update.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(r=>r.json())
+            .then(d=>{
                 if(d.status==='success'){
-                    Swal.fire({toast:true,position:'top-end',icon:'success',title:'ลบข้อมูลเรียบร้อย',showConfirmButton:false,timer:2000});
+                    Swal.fire({
+                        toast:true,
+                        position:'top-end',
+                        icon:'success',
+                        title:d.message,
+                        showConfirmButton:false,
+                        timer:2000
+                    });
                     reloadSection(module);
+                } else {
+                    Swal.fire('ผิดพลาด', d.message, 'error');
                 }
             });
         }
     });
 }
-</script>
 
+</script>
 </body>
 </html>
